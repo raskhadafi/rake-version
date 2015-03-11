@@ -1,8 +1,10 @@
 require 'helper'
 
 describe RakeVersion::Context do
-  let(:root){ '/tmp' }
-  subject{ RakeVersion::Context.new(root) }
+  let(:root) { '/tmp' }
+  subject { RakeVersion::Context.new(root) }
 
-  its(:root){ should eq(root) }
+  it "should have the right root" do
+    subject.root.should eq(root)
+  end
 end
