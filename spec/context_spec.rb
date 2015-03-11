@@ -5,6 +5,6 @@ describe RakeVersion::Context do
   subject { RakeVersion::Context.new(root) }
 
   it "should have the right root" do
-    subject.root.should eq(root)
+    expect(subject.root).to eq(root)
   end
 end

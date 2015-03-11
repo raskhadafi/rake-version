@@ -31,28 +31,28 @@ describe RakeVersion::Manager do
   it "should return a version object" do
     with_context do |m|
       m.version.tap do |v|
-        v.should be_a_kind_of(RakeVersion::Version)
-        v.major.should == 1
-        v.minor.should == 2
-        v.patch.should == 3
-        v.prerelease.should == 'beta'
-        v.build.should == '456'
+        expect(v).to be_a_kind_of(RakeVersion::Version)
+        expect(v.major).to == 1
+        expect(v.minor).to == 2
+        expect(v.patch).to == 3
+        expect(v.prerelease).to == 'beta'
+        expect(v.build).to == '456'
       end
     end
   end
 
   it "should require a context for all operations" do
-    lambda{ @manager.version }.should raise_error(RakeVersion::MissingContext)
-    lambda{ @manager.set '1.2.3' }.should raise_error(RakeVersion::MissingContext)
-    lambda{ @manager.bump :minor }.should raise_error(RakeVersion::MissingContext)
+    expect(lambda{ @manager.version }).to raise_error(RakeVersion::MissingContext)
+    expect(lambda{ @manager.set '1.2.3' }).to raise_error(RakeVersion::MissingContext)
+    expect(lambda{ @manager.bump :minor }).to raise_error(RakeVersion::MissingContext)
   end
 
   it "should return the correct version" do
-    with_context{ |m| m.version.to_s.should == MANAGER_SAMPLE_VERSION }
+    expect(with_context{ |m| m.version.to_s }).to == MANAGER_SAMPLE_VERSION
   end
 
   it "should set the correct version" do
-    with_context{ |m| m.set('1.2.3').to_s.should == '1.2.3' }
+    expect(with_context{ |m| m.set('1.2.3').to_s }).to == '1.2.3'
   end
 
   it "should ask for the context root" do

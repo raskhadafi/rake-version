@@ -61,7 +61,7 @@ describe RakeVersion::Tasks do
 
     it "should define all tasks" do
       %w( version version:set version:bump:major version:bump:minor version:bump:patch ).each do |name|
-        Rake::Task[name].should be_a_kind_of(Rake::Task)
+        expect(Rake::Task[name]).to be_a_kind_of(Rake::Task)
       end
     end
 
