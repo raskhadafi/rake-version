@@ -19,5 +19,6 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   Coveralls::SimpleCov::Formatter
 ]
 
+require 'pry'
 require 'rspec'
 require 'rake-version'
