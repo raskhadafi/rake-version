@@ -23,35 +23,35 @@ describe RakeVersion::Config do
       copiers.each do |args|
         expect(lambda{ @config.copy *args }).not_to raise_error
       end
-      expect(@config.copiers.length).to == copiers.length
+      expect(@config.copiers.length).to eq(copiers.length)
     end
 
     it "should create copiers with a ruby extension glob by default" do
-      expect(RakeVersion::Copier.new).to('src/**/*.rb')
+      expect(RakeVersion::Copier.new).to match('src/**/*.rb')
       @config.copy
     end
 
     it "should return itself when creating a copier" do
-      expect(@config.copy).to === @config
+      expect(@config.copy).to be(@config)
     end
 
     it "should return a copy of its copiers array" do
       @config.copy
       @config.copiers.clear
-      expect(@config.copiers.length).to == 1
+      expect(@config.copiers.length).to eq(1)
     end
   end
 
   describe 'Extension' do
 
     it "should have the ruby extension by default" do
-      expect(@config.extension).to == 'rb'
+      expect(@config.extension).to eq('rb')
     end
 
     it "should accept alphanumerical extensions" do
       [ :rb, 'js', :sh, 'py', double('extension', :to_s => 'java') ].each do |ext|
         expect(lambda{ @config.extension = ext }).not_to raise_error
-        expect(@config.extension).to == ext.to_s
+        expect(@config.extension).to eq(ext.to_s)
       end
     end
 

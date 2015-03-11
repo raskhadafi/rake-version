@@ -14,9 +14,14 @@ describe RakeVersion::Manager do
     File.open(MANAGER_VERSION_FILE, 'w'){ |f| f.write MANAGER_SAMPLE_VERSION }
 
     @version = double('version')
-    @version.stub(:to_s){ MANAGER_SAMPLE_VERSION }
-    @version.stub(:bump){ @version }
-    @version.stub(:kind_of?){ |type| type == RakeVersion::Version }
+    allow(@version).to receive_messages(
+      to_s: MANAGER_SAMPLE_VERSION,
+      bump: @version,
+    )
+
+    allow(@version).to receive(:kind_of?) do |arg|
+      expect(arg).to eq(RakeVersion::Version)
+    end
 
     @copier = double('copier', :copy => nil)
     @config = double('config', :copiers => [ @copier ])
@@ -32,11 +37,11 @@ describe RakeVersion::Manager do
     with_context do |m|
       m.version.tap do |v|
         expect(v).to be_a_kind_of(RakeVersion::Version)
-        expect(v.major).to == 1
-        expect(v.minor).to == 2
-        expect(v.patch).to == 3
-        expect(v.prerelease).to == 'beta'
-        expect(v.build).to == '456'
+        expect(v.major).to eq(1)
+        expect(v.minor).to eq(2)
+        expect(v.patch).to eq(3)
+        expect(v.prerelease).to eq('beta')
+        expect(v.build).to eq('456')
       end
     end
   end
@@ -48,11 +53,15 @@ describe RakeVersion::Manager do
   end
 
   it "should return the correct version" do
-    expect(with_context{ |m| m.version.to_s }).to == MANAGER_SAMPLE_VERSION
+    with_context do |m|
+      expect(m.version.to_s).to eq(MANAGER_SAMPLE_VERSION)
+    end
   end
 
   it "should set the correct version" do
-    expect(with_context{ |m| m.set('1.2.3').to_s }).to == '1.2.3'
+    with_context do |m|
+      expect(m.set('1.2.3').to_s).to eq('1.2.3')
+    end
   end
 
   it "should ask for the context root" do
