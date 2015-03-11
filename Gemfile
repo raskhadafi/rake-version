@@ -12,4 +12,5 @@ group :development do
   gem 'travis-lint'
   gem 'fakefs', require: 'fakefs/safe'
   gem 'coveralls', require: false
+  gem 'guard-rspec', require: false
 end
