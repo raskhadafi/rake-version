@@ -14,14 +14,14 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "rake-version"
-  gem.homepage = "https://github.com/AlphaHydrae/rake-version"
-  gem.license = "MIT"
-  gem.summary = %Q{Simple rake tasks for version management.}
+  gem.name        = "raskhadafi_rake-version"
+  gem.homepage    = "https://github.com/raskhadafi/rake-version"
+  gem.license     = "MIT"
+  gem.summary     = %Q{Simple rake tasks for version management.}
   gem.description = %Q{Rake tasks to manage your VERSION file. No repository management (tags, committing, pushing), no release management.}
-  gem.email = "hydrae.alpha@gmail.com"
-  gem.authors = ["AlphaHydrae"]
-  gem.files = %x[git ls-files -- lib].split("\n") + %w(Gemfile LICENSE.txt README.md VERSION)
+  gem.email       = %w[hydrae.alpha@gmail.com roman@good2go.ch]
+  gem.authors     = %w[AlphaHydrae raskhadafi]
+  gem.files       = %x[git ls-files -- lib].split("\n") + %w(Gemfile LICENSE.txt README.md VERSION)
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
